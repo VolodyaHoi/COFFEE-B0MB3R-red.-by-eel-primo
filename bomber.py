@@ -29,8 +29,9 @@ class ui:
         self.current_page = 0
         self.action_result = ""
         self.input_immune = False
+        self.hohol_mode = False
 
-        self.main_menu = menu(["[1] Start SPAM", "   \__Supports RU", "[2] Config", "   \__Config bomber", "[3] Links", "   \__Links to creators", "[4] Reinstall app", "   \__Do this if you do smth wrong...", "[5] Exit", "   \__Leave app"], [1,2,3,4,5], [5,1,7,3,4])
+        self.main_menu = menu(["[1] Start SPAM", "   \__Supports RU", "[2] Config", "   \__Configure bomber", "[3] Links", "   \__Links to creators", "[4] Reinstall app", "   \__Do this if you do smth wrong...", "[5] Exit", "   \__Leave app"], [1,2,3,4,5], [5,1,7,3,4])
         '''
         Page id's
         0 - main menu
@@ -63,7 +64,7 @@ class ui:
             print(string)
     
     def _clear_scr_(self):
-        for i in range(64):
+        for i in range(48):
             print("")
          #os.system('cls' if os.name=='nt' else 'clear')
         
@@ -77,11 +78,14 @@ class ui:
         print(Back.RED + " ╚█████╔╝╚█████╔╝██║░░░░░██║░░░░░███████╗███████╗ " + Back.RESET)
         print(Back.RED + " ░╚════╝░░╚════╝░╚═╝░░░░░╚═╝░░░░░╚══════╝╚══════╝ " + Back.RESET)
         print(Back.RED + "                                                  " + Back.RESET)
-        print(Style.BRIGHT + Back.BLUE + "B0MB3R by VolodyaHoi          " + Back.RESET)
-        print(Style.BRIGHT + Back.YELLOW + "Supplied by eel-primo (cd-con)" + Back.RESET)
+        if self.hohol_mode:
+            print(Style.BRIGHT + Back.BLUE + "B0MB3R by VolodyaHoi          " + Back.RESET)
+            print(Style.BRIGHT + Back.YELLOW + "Supplied by eel-primo (cd-con)" + Back.RESET)
+        else:
+            print(Style.BRIGHT + "B0MB3R by VolodyaHoi          " + Back.RESET)
+            print(Style.BRIGHT + "Supplied by eel-primo (cd-con)" + Back.RESET)
 
     def content(self, page_id):
-        print("Current page is", self.current_page)
         if page_id == 0:
               self._print_content_(self.main_menu)  
         #implement
