@@ -1,7 +1,7 @@
 from libs import pyProxy, pyAutoUpdate
 
 li = pyAutoUpdate.lib_installer(["colorama"])
-fu = pyAutoUpdate.file_updater(["/libs/pyProxy", "/libs/pyAutoUpdate"], ["https://raw.githubusercontent.com/eel-primo/pyProxy/main/pyProxy.py","https://raw.githubusercontent.com/eel-primo/pyAutoUpdate/main/pyAutoUpdate.py"])
+fu = pyAutoUpdate.file_updater(["libs/pyProxy", "libs/pyAutoUpdate"], ["https://raw.githubusercontent.com/eel-primo/pyProxy/main/pyProxy.py","https://raw.githubusercontent.com/eel-primo/pyAutoUpdate/main/pyAutoUpdate.py"])
 app_update = pyAutoUpdate.file_updater(["bomber.py"], [""])
 
 try:
@@ -19,10 +19,11 @@ except ImportError:
 init(autoreset=True) 
 
 class menu:
-    def __init__(self, content, navigation, navigation_link):
+    def __init__(self, content, navigation, navigation_link, input_enabled = True):
         self.content = content
         self.navigation = navigation
         self.nav_link = navigation_link
+        self.input_enabled = input_enabled
 
 class ui:
     def __init__(self):
@@ -31,7 +32,8 @@ class ui:
         self.input_immune = False
         self.hohol_mode = False
 
-        self.main_menu = menu(["[1] Start SPAM", "   \__Supports RU", "[2] Config", "   \__Configure bomber", "[3] Links", "   \__Links to creators", "[4] Reinstall app", "   \__Do this if you do smth wrong...", "[5] Exit", "   \__Leave app"], [1,2,3,4,5], [5,1,7,3,4])
+        self.main_menu = menu(["[1] Start SPAM", "   \__Supports RU", "[2] Config", "   \__Configure bomber", "[3] Links", "   \__Links to creators", "[4] Reinstall app", "   \__Do this if you did smth wrong...", "[5] Exit", "   \__Leave app"], [1,2,3,4,5], [6,1,7,3,4])
+        self.bomber_state = menu(["%NUMBER%", "   \__Sended %SENDED% out of %SERVICE_COUNT%", "    \_Sending %SERVICE_NAME%", ""], [], [], input_enabled = False)
         '''
         Page id's
         0 - main menu
@@ -87,9 +89,9 @@ class ui:
 
     def content(self, page_id):
         if page_id == 0:
-              self._print_content_(self.main_menu)  
-        #implement
-        pass
+              self._print_content_(self.main_menu)
+        if page_id == 6:
+              self._print_content_(self.bomber_state)
 
     def navigation(self, result):
         self.action_result = ""
